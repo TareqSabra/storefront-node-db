@@ -1,14 +1,15 @@
-version: '3.9'
-
 services:
-  postgres:
-    image: postgres
+  db:
+    image: postgres:15
+    container_name: storefront_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tareq
+      POSTGRES_PASSWORD: tareq
+      POSTGRES_DB: storefront
     ports:
-      - '5432:5432'
-    env_file:
-      - .env
+      - "5434:5432"
     volumes:
-      - 'postgres:/var/lib/postgresql/data'
-
+      - storefront_data:/var/lib/postgresql
 volumes:
-  postgres:
+  storefront_data:

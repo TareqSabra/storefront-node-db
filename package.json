@@ -4,18 +4,20 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
+    "dev": "set NODE_ENV=development&& npm start",
     "start": "nodemon --exec ts-node --transpile-only src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "test": "jasmine-ts",
-    "tsc": "tsc",
-    "migrate": "db-migrate up",
-    "migrate-down": "db-migrate down",
+    "test": "set NODE_ENV=test&& db-migrate --env test up && jasmine-ts",
+    "test:clean": "set NODE_ENV=test&& db-migrate --env test reset && db-migrate --env test up && jasmine-ts",
+    "migrate:dev": "db-migrate --env dev up",
+    "migrate:test": "db-migrate --env test up",
     "db:create": "docker exec storefront_db psql -U tareq -d storefront -c \"CREATE DATABASE storefront_dev; CREATE DATABASE storefront_test;\""
   },
   "author": "Udacity",
   "license": "ISC",
   "dependencies": {
     "@types/cors": "^2.8.19",
+    "@types/jsonwebtoken": "^9.0.10",
     "bcrypt": "^6.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.6",
@@ -23,6 +25,7 @@
     "db-migrate-pg": "^1.5.2",
     "dotenv": "^17.4.2",
     "express": "^4.17.1",
+    "jsonwebtoken": "^9.0.3",
     "nodemon": "^3.1.14",
     "pg": "^8.5.1",
     "typescript": "^5.0.0"

@@ -11,5 +11,31 @@ services:
       - "5434:5432"
     volumes:
       - storefront_data:/var/lib/postgresql
+  db-dev:
+    image: postgres:15
+    container_name: storefront_db_dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tareq
+      POSTGRES_PASSWORD: tareq
+      POSTGRES_DB: storefront_dev
+    ports:
+      - "5435:5432"
+    volumes:
+      - storefront_data_dev:/var/lib/postgresql
+  db-test:
+    image: postgres:15
+    container_name: storefront_db_test
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tareq
+      POSTGRES_PASSWORD: tareq
+      POSTGRES_DB: storefront_test
+    ports:
+      - "5436:5432"
+    volumes:
+      - storefront_data_test:/var/lib/postgresql
 volumes:
   storefront_data:
+  storefront_data_dev:
+  storefront_data_test:

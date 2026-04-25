@@ -1,5 +1,5 @@
-INSERT INTO users (first_name, last_name, password) VALUES ('Tareq', 'Admin', '$2b$10$gluRdhQ45aIucisxX3hhyeEIvUti1HW.oPXj7ZNEWL6mMopFoQuZu');
-INSERT INTO users (first_name, last_name, password) VALUES ('John', 'Doe', '$2b$10$gluRdhQ45aIucisxX3hhyeEIvUti1HW.oPXj7ZNEWL6mMopFoQuZu');
+INSERT INTO users (first_name, last_name, password) VALUES ('Tareq', 'Admin', 'test');
+INSERT INTO users (first_name, last_name, password) VALUES ('John', 'Doe', 'test');
 
 INSERT INTO products (name, price, category) VALUES ('Gaming Laptop', 1200.00, 'Electronics');
 INSERT INTO products (name, price, category) VALUES ('Ergonomic Chair', 250.00, 'Furniture');

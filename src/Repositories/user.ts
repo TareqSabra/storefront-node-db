@@ -19,19 +19,30 @@ export const getAllUsers = async (): Promise<user[]> => {
 };
 
 export const getUserById = async (id: number): Promise<user | null> => {
-  const connection = await client.connect();
-  const sql = "SELECT * FROM users WHERE id = $1";
-  const result = await connection.query(sql, [id]);
-  connection.release();
-  return result.rows[0] || null;
+  try {
+    const connection = await client.connect();
+    const sql = "SELECT * FROM users WHERE id = $1";
+    const result = await connection.query(sql, [id]);
+    console.log(result.rows[0]);
+    connection.release();
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error(`Error fetching user with id ${id}:`, error);
+    throw new Error("Could not fetch user");
+  }
 };
 
 export const getUserByName = async (first_name: string, last_name: string): Promise<user | null> => {
-  const connection = await client.connect();
-  const sql = "SELECT * FROM users WHERE first_name = $1 AND last_name = $2";
-  const result = await connection.query(sql, [first_name, last_name]);
-  connection.release();
-  return result.rows[0] || null;
+  try {
+    const connection = await client.connect();
+    const sql = "SELECT * FROM users WHERE first_name = $1 AND last_name = $2";
+    const result = await connection.query(sql, [first_name, last_name]);
+    connection.release();
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error(`Error fetching user with name ${first_name} ${last_name}:`, error);
+    throw new Error("Could not fetch user");
+  }
 };
 
 export const createUser = async (

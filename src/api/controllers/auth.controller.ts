@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { getUserById } from "../../Repositories/user";
 import jwt from "jsonwebtoken";
-import { verifyPassword } from "../../util";
+import { verifyPassword, hashPassword } from "../../util";
 
 export const authController = async (req: Request, res: Response) => {
     const { id, password } = req?.body || {};
@@ -13,6 +13,7 @@ export const authController = async (req: Request, res: Response) => {
         return res.status(401).json({ error: 'Invalid credentials' });
     }
     const isPasswordValid = await verifyPassword(password, user.password);
+    console.log(isPasswordValid);
     if (!isPasswordValid) {
         return res.status(401).json({ error: 'Invalid credentials' });
     }

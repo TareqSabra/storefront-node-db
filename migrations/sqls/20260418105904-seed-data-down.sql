@@ -1,5 +1,4 @@
 DELETE FROM order_products WHERE 1=1;
-DELETE FROM order_items WHERE 1=1;
 DELETE FROM orders WHERE 1=1;
 DELETE FROM products WHERE 1=1;
 DELETE FROM users WHERE 1=1;

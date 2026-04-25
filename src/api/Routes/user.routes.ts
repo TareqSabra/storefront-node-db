@@ -15,6 +15,6 @@ userRouter.get('/', authMiddleware, getAllUsersController);
 userRouter.get('/:id', authMiddleware, getUserByIdController);
 
 //create
-userRouter.post('/', authMiddleware, createUserController);
+userRouter.post('/', createUserController);
 
 export default userRouter;

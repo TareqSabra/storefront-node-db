@@ -1,7 +1,4 @@
-import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
-
-dotenv.config();
 
 const pepper = process.env.BCRYPT_PASSWORD || "defaultPepper";
 const saltRounds = parseInt(process.env.SALT_ROUNDS || "10");

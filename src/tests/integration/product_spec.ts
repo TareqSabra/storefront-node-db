@@ -14,7 +14,7 @@ describe('Product Repository Integration Test', () => {
 
   it('should create a product', async () => {
     const product = await createProduct('Test Product', 100, 'test');
-    testProductId = product.id; // Save for subsequent tests
+    testProductId = product.id as number; // Save for subsequent tests
     expect(product.name).toBe('Test Product');
     // Price comes back as a string from PG for numeric types
     expect(Number(product.price)).toBe(100);

@@ -7,5 +7,5 @@ INSERT INTO products (name, price, category) VALUES ('Wireless Mouse', 50.00, 'E
 
 INSERT INTO orders (user_id, status) VALUES (1, 'active');
 
-INSERT INTO order_items (order_id, product_id, quantity) VALUES (1, 1, 1);
-INSERT INTO order_items (order_id, product_id, quantity) VALUES (1, 3, 2);
+INSERT INTO order_products (order_id, product_id, quantity) VALUES (1, 1, 1);
+INSERT INTO order_products (order_id, product_id, quantity) VALUES (1, 3, 2);

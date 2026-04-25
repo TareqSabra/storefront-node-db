@@ -1,2 +1,2 @@
-/* Replace with your SQL commands */
-DROP TABLE order_items;
+DROP TABLE IF EXISTS order_products;
+DROP TABLE IF EXISTS order_items;

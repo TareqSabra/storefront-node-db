@@ -2,24 +2,22 @@ import { createProduct, getAllProducts, getProductById } from '../../Repositorie
 import client from '../../db';
 
 describe('Product Repository Integration Test', () => {
+  let testProductId: number;
+
   beforeAll(async () => {
     const connection = await client.connect();
-    // Clean up tables before tests. Note: order of deletion matters due to FKs
+    // Order matters due to FKs
     await connection.query('DELETE FROM order_products;');
     await connection.query('DELETE FROM products;');
-    // Resetting sequences if they exist
-    try {
-        await connection.query('ALTER SEQUENCE products_id_seq RESTART WITH 1;');
-    } catch (e) {
-        // sequence might not exist or have different name
-    }
     connection.release();
   });
 
   it('should create a product', async () => {
     const product = await createProduct('Test Product', 100, 'test');
+    testProductId = product.id; // Save for subsequent tests
     expect(product.name).toBe('Test Product');
-    expect(product.price).toBe(100);
+    // Price comes back as a string from PG for numeric types
+    expect(Number(product.price)).toBe(100);
   });
 
   it('should return a list of products', async () => {
@@ -28,9 +26,7 @@ describe('Product Repository Integration Test', () => {
   });
 
   it('should get product by id', async () => {
-    const products = await getAllProducts();
-    const productId = products[0].id;
-    const product = await getProductById(productId);
+    const product = await getProductById(testProductId);
     expect(product?.name).toBe('Test Product');
   });
 });

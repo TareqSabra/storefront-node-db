@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { getAllUsers, getUserById, createUser } from '../../Repositories/user';
+import { generateToken } from '../../util';
 
 export const getAllUsersController = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -29,8 +30,9 @@ export const createUserController = async (req: Request, res: Response, next: Ne
     return res.status(400).json({ error: 'Missing required fields' });
   }
   try {
-    const result = await createUser(first_name, last_name, password);
-    res.json(result);
+    const user = await createUser(first_name, last_name, password);
+    const token = generateToken(user.id as number);
+    res.json({ ...user, token });
   } catch (error) {
     next(error);
   }

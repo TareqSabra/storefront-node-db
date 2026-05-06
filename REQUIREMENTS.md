@@ -40,3 +40,36 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+## Database Schema
+
+### Table: `users`
+| Column | Type |
+| :--- | :--- |
+| `id` | integer |
+| `first_name` | character varying(50) |
+| `last_name` | character varying(50) |
+| `password` | character varying(255) |
+
+### Table: `products`
+| Column | Type |
+| :--- | :--- |
+| `id` | integer |
+| `name` | character varying(100) |
+| `price` | decimal(10,2) |
+| `category` | character varying(50) |
+
+### Table: `orders`
+| Column | Type |
+| :--- | :--- |
+| `id` | integer |
+| `user_id` | integer |
+| `status` | character varying(20) |
+
+### Table: `order_products`
+| Column | Type |
+| :--- | :--- |
+| `id` | integer |
+| `order_id` | integer |
+| `product_id` | integer |
+| `quantity` | integer |
+
